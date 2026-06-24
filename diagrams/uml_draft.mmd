@@ -6,7 +6,9 @@ classDiagram
         +str name
         +int minutesAvailable
         +str preferences
+        +List~Pet~ pets
         +update() void
+        +addPet(pet) void
     }
 
     class Pet {
@@ -19,24 +21,41 @@ classDiagram
         +update() void
     }
 
+    class Frequency {
+        <<enumeration>>
+        ONE_TIME
+        DAILY
+        WEEKLY
+    }
+
     class Task {
+        +str taskId
         +str name
         +int duration
         +int priority
+        +Pet pet
+        +date dueDate
+        +Frequency frequency
         +time startTime
+        +bool completed
         +update() void
+        +markComplete() void
+        +occursOn(date) bool
     }
 
     class Schedule {
         +Owner owner
         +List~Task~ tasks
         +addTask(task) void
-        +deleteTask(task) void
+        +deleteTask(taskId) void
         +showTasks(date) List~Task~
+        +tasksFor(pet) List~Task~
         +generateDailyPlan(date) List~Task~
         +explainPlan() str
     }
 
-    Owner "1" --> "1" Pet : owns
+    Owner "1" --> "*" Pet : owns
     Schedule "1" --> "1" Owner : has
     Schedule "1" o-- "*" Task : contains
+    Task "*" --> "1" Pet : for
+    Task "*" --> "1" Frequency : repeats

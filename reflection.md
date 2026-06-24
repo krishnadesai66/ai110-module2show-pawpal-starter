@@ -9,13 +9,24 @@ The goal of this app is to help a busy pet owner stay consistent with pet care. 
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
 
+I chose to create four classes - Pet, Tasks,Schedule, and Owner. A pet is what this app centers around and contains information regarding its needs and care. This information can be updated via the Update() method. The tasks associated with this pet are outlined in the Task class with attributes regarding its duration, time, and priority. There is the owner class which has  a "Has-a" relationship with the Pet class (1 -> n). The owner has pets, preferences, availbility, and also an Update() method. Lastly, the schedule ties all of these classes together, generates a plan for an owner based on tasks associated with the pets they own. 
+
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
-
+Yes, Task has no date attribute which makes it difficult to show show_tasks() and generate_daily_plan() based on the date. There is no recurrence attribute in Task which may make users create extra task objects for the same task (ie two task objects to give medication if a pet needs meds twice daily). There should a completed bool for each task and a tie between  task.pet and owner.pet. Both are important when generating schedules and for overall clarity. Also, adding a task_id helps when deleting a task that is seperate from another task for another pet with the same name (ie walk for PetA AND walk for PetB, but you want to delete the walk for PetA only).
 ---
 
+## Sample Output
+
+=== Today's Schedule ===
+Plan for 2026-06-23 (65/120 min used):
+  08:00 — Thyroid meds for Milo (5 min) [priority 1]
+  08:05 — Feeding for Milo (10 min) [priority 1]
+  08:15 — Morning walk for Biscuit (30 min) [priority 1]
+  08:45 — Enrichment play for Biscuit (20 min) [priority 2]
+  
 ## 2. Scheduling Logic and Tradeoffs
 
 **a. Constraints and priorities**
