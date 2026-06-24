@@ -2,6 +2,8 @@
 
 ## 1. System Design
 
+The goal of this app is to help a busy pet owner stay consistent with pet care. This app should be able to add a pet, schedule a walk, see today's tasks, track tasks (walks, feedings, meds, enrichment, grooming).
+
 **a. Initial design**
 
 - Briefly describe your initial UML design.
